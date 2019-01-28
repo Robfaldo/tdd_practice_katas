@@ -14,11 +14,25 @@ require './lib/next_bigger_number_with_same_digits.rb'
 
 RSpec.describe NextBiggerNumberCalculator do
   describe '#next_bigger' do
+    subject(:calculator) { described_class.new }
+
     context 'when the number has 2 digits' do
-      it 'returns the largest integer of those 2 digits' do
-        calculator = NextBiggerNumberCalculator.new
-        answer = calculator.next_bigger(12)
-        expect(answer).to eq(21)
+      context 'and the second digit is lower than the first' do
+        it 'returns the largest integer of those 2 digits' do
+          expect(calculator.next_bigger(12)).to eq(21)
+        end
+      end
+
+      context 'and the second digit is lower than the first' do
+        it 'returns -1' do
+          expect(calculator.next_bigger(32)).to eq(-1)
+        end
+      end
+
+      context 'and the second digit is the same as the first' do
+        it 'returns -1' do
+          expect(calculator.next_bigger(22)).to eq(-1)
+        end
       end
     end
   end
