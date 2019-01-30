@@ -35,5 +35,66 @@ RSpec.describe NextBiggerNumberCalculator do
         end
       end
     end
+
+    context 'when the number has 3 digits' do
+      context 'when all digits are the same' do
+        it 'calculates the correct score' do
+          expect(calculator.next_bigger(111)).to eq(-1)
+        end
+      end
+
+      context 'when the last digit is higher than the second' do
+        it 'calculates the correct score' do
+          expect(calculator.next_bigger(101)).to eq(110)
+        end
+      end
+
+      context 'when the last digit is lower than the second' do
+        context 'and the second is same as first' do
+          it 'caclulates the correct score' do
+            expect(calculator.next_bigger(110)).to eq(-1)
+          end
+        end
+        context 'and the second is lower than the first' do
+          it 'caclulates the correct score' do
+            expect(calculator.next_bigger(210)).to eq(-1)
+          end
+        end
+      end
+
+      context 'when the last digit is the same as the second' do
+        context 'and the first is higher' do
+          it 'caclulates the correct score' do
+            expect(calculator.next_bigger(311)).to eq(-1)
+          end
+        end
+        context 'and the first is lower' do
+          it 'caclulates the correct score' do
+            expect(calculator.next_bigger(244)).to eq(424)
+          end
+        end
+      end
+    end
   end
 end
+
+
+# 3 digits
+# 101 - if the last digit is higher than the last -1 then swap them
+# 110 - if the last digit is lower than the last -1, and the last -1 is the same as the first then return -1
+# 210 - *************************************************************************** OR higher as the first then return -1
+#
+#
+# 111 - if the last digit is the same as the last -1 and the first then return -1 - DOING THIS ONE
+# 311 - if the last digit is the same as the last -1 and the first is higher then return -1
+# 244 - if the last digit is the same as the last -1 and the first is lower then swap the second and first digits - DOING THIS ONE
+
+# 123
+# 192
+# 191
+# 291
+# 199
+# 991
+# 921
+# 999
+#
