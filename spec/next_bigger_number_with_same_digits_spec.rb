@@ -75,6 +75,21 @@ RSpec.describe NextBiggerNumberCalculator do
         end
       end
     end
+
+    context 'when the number has 4 digits' do
+      it 'caclulates the correct score' do
+        expect(calculator.next_bigger(2017)).to eq(2071)
+      end
+      it 'caclulates the correct score' do
+        expect(calculator.next_bigger(2100)).to eq(-1)
+      end
+      it 'caclulates the correct score' do
+        expect(calculator.next_bigger(1233)).to eq(1323)
+      end
+      it 'caclulates the correct score' do
+        expect(calculator.next_bigger(1001)).to eq(1010)
+      end
+    end
   end
 end
 
@@ -98,3 +113,18 @@ end
 # 921
 # 999
 #
+#
+# 4 digits
+# 1001 - move the last digit 1 to the left
+# 1010 - if the second last digit is bigger than the last then move it one to the left
+# 1100 - biggest number because I can't move the smallest number to the left
+# 2100 - biggest number because I can't move the smallest number to the left
+# 1200 -
+# 1204
+# 1231
+# 1233
+#
+#
+# start with last number - is it bigger than the last -1? If so, swap them
+# if no: go to the last -1 number, is it bigger than the last -2? If so, swap them
+# If last number and still haven't solved then return -1
