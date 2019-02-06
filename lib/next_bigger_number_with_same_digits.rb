@@ -1,29 +1,34 @@
 class NextBiggerNumberCalculator
   def next_bigger(num)
+    numbers = num.to_s.split('')
+    current_index = numbers.length - 1
 
-    num_to_array = num.to_s.split('')
+    numbers.length.times do
+      return -1 if last_number(current_index)
 
-    # create index starting at the last number
-    current_index = num_to_array.length - 1
-    # go through each item of the array
-    num_to_array.length.times do
-      # if it's the last number then return -1
-      return -1 if current_index == 0
+      if numbers[current_index] > numbers[current_index - 1]
+        final_numbers = swap_numbers(numbers, current_index)
 
-      # else if the num is bigger than the num before then switch the numbers
-      if num_to_array[current_index] > num_to_array[current_index - 1]
-        first_number = num_to_array[current_index - 1]
-        second_number = num_to_array[current_index]
-
-        # swap the numbers
-        num_to_array[current_index] = first_number
-        num_to_array[current_index - 1] = second_number
-
-        # return the result
-        return num_to_array.join.to_i
+        return final_numbers.join.to_i
       end
 
-      current_index = current_index - 1
+      current_index -= 1
     end
+  end
+
+  private
+
+  def swap_numbers(numbers, current_index)
+    first_number = numbers[current_index - 1]
+    second_number = numbers[current_index]
+
+    numbers[current_index] = first_number
+    numbers[current_index - 1] = second_number
+
+    return numbers
+  end
+
+  def last_number(current_index)
+    current_index == 0
   end
 end
